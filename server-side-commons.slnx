@@ -1,0 +1,7 @@
+<Solution>
+  <Project Path="exs.commons/exs.commons.csproj" />
+  <Project Path="exs.databaseCommons/exs.databaseCommons.csproj" />
+  <Project Path="exs.dbContextCommons/exs.dbContextCommons.csproj" />
+  <Project Path="exs.modelCommons/exs.modelCommons.csproj" />
+  <Project Path="exs.webCommons/exs.webCommons.csproj" />
+</Solution>
