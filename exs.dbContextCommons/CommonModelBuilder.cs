@@ -4,10 +4,12 @@ using Microsoft.EntityFrameworkCore;
 
 namespace exs.dbContextCommons
 {
-	public static class CommonModelContext
+	public static class CommonModelBuilder
 	{
 		public static void CreateModel(ModelBuilder modelBuilder)
 		{
+			if (_created) return;
+
 			modelBuilder.Entity<ClientDevicePlatform>(entity =>
 			{
 				entity.ToTable("client_device_platform");
@@ -21,6 +23,9 @@ namespace exs.dbContextCommons
 				entity.ComplexProperty(e => e.Token);
 				entity.ComplexProperty(e => e.ClientInfo);
 			});
+			_created = true;
 		}
+
+		private static bool _created = false;
 	}
 }
