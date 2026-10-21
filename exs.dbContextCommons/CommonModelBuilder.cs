@@ -1,6 +1,7 @@
 ﻿using exs.modelCommons.AppStructure;
 using exs.modelCommons.UserManagement;
 using Microsoft.EntityFrameworkCore;
+using System.Runtime.CompilerServices;
 
 namespace exs.dbContextCommons
 {
@@ -8,7 +9,7 @@ namespace exs.dbContextCommons
 	{
 		public static void CreateModel(ModelBuilder modelBuilder)
 		{
-			if (_created) return;
+			if (!_built.TryAdd(modelBuilder, null)) return;
 
 			modelBuilder.Entity<ClientDevicePlatform>(entity =>
 			{
@@ -23,9 +24,11 @@ namespace exs.dbContextCommons
 				entity.ComplexProperty(e => e.Token);
 				entity.ComplexProperty(e => e.ClientInfo);
 			});
-			_created = true;
 		}
 
-		private static bool _created = false;
+		// Per-ModelBuilder rather than a process-wide flag: EF builds the model more than once
+		// (e.g. Migrate() builds it twice to detect a non-deterministic model), and a static flag
+		// made every build after the first come out without these entities.
+		private static readonly ConditionalWeakTable<ModelBuilder, object?> _built = new();
 	}
 }
