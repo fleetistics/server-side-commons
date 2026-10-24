@@ -8,7 +8,8 @@ namespace exs.dbContextCommons
 	{
 		public static void CreateModel(ModelBuilder modelBuilder)
 		{
-			if (_created) return;
+			// Per model, not per process: see NotificationsModelBuilder.CreateNotificationModel.
+			if (modelBuilder.Model.FindEntityType(typeof(UserSession)) != null) return;
 
 			modelBuilder.Entity<ClientDevicePlatform>(entity =>
 			{
@@ -23,9 +24,6 @@ namespace exs.dbContextCommons
 				entity.ComplexProperty(e => e.Token);
 				entity.ComplexProperty(e => e.ClientInfo);
 			});
-			_created = true;
 		}
-
-		private static bool _created = false;
 	}
 }
