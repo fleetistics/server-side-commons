@@ -13,6 +13,11 @@ namespace exs.modelCommons.UserManagement
         // still carries it be treated as a harmless retry instead of a stolen-cookie replay.
         public string PreviousSessionRotationKey { get; set; } = string.Empty;
 
+        // True: fixed lifetime ending at ExpirationTime, persistent cookie (login with "remember me",
+        // auto-device sessions). False: idle lifetime that every refresh pushes forward, capped at
+        // CreationTime + max lifetime, session cookie. Defaults to true so existing rows keep behaving as before.
+        public bool IsPersistent { get; set; } = true;
+
         public DateTime CreationTime { get; set; }
         public DateTime ExpirationTime { get; set; }
         public DateTime LatestRefreshTime { get; set; }
