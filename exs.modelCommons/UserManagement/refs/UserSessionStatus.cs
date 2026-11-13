@@ -8,6 +8,8 @@
         public const short LoggedOutByUser = 2;
         public const short Expired = 3;
         public const short ClosedByConcurrentLogin = 4;
+        /// <summary>A superseded refresh key was replayed outside the grace window: the session was revoked.</summary>
+        public const short RevokedKeyReuse = 5;
         public const short AccountCancelledByUser = 16;
 
         public short Id { get; set; }
