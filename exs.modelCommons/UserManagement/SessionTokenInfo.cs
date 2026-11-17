@@ -6,7 +6,7 @@ namespace exs.modelCommons.UserManagement
     public class SessionTokenInfo
     {
         // Per-session rotation state of the refresh cookie. The cookie value is
-        // "{sessionId}.{RotationCounter}.{mac}", where the mac is derived on the server from a secret
+        // "{UserSession.SessionKey}.{RotationCounter}.{mac}", where the mac is derived on the server from a secret
         // it holds plus KeySalt, so nothing stored here can be replayed as a credential. The counter
         // goes up by one on every rotation (see AuthService). Auto-device sessions never use the
         // cookie: they only count rotations and leave KeySalt empty.

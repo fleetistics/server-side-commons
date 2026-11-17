@@ -21,6 +21,7 @@ namespace exs.dbContextCommons
 				entity.ToTable("user_session");
 				entity.HasKey(e => new { e.Id });
 				entity.Property(e => e.Id).ValueGeneratedOnAdd();
+				entity.HasIndex(e => e.SessionKey).IsUnique();
 				entity.ComplexProperty(e => e.Token);
 				entity.ComplexProperty(e => e.ClientInfo);
 			});
